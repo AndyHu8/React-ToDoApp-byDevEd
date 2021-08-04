@@ -1,15 +1,23 @@
 import React from 'react';
+//https://www.youtube.com/watch?v=pCA4qpQDZD8&t=1168s (29:42)
 
-const Form = () => {
+const Form = (props) => {
     //Here i can run JS and Func.
     const inputTextHandler = (event) => {
       console.log(event.target.value);
+      //Input wird hier neu gesetzt
+      props.setTextInput(event.target.value);
+    }
+
+    const submitTodoHandler = (event) => {
+      event.preventDefault();
+      props.setTodos([...todos, {text: inputText, completed: false, id: Math.random() * 1000}]);
     }
 
     return(
     <form>
-      <input onChange={inputTextHandler} type="text" className="todo-input" />
-      <button className="todo-button" type="submit">
+      <input onChange={inputTextHandler} type="text" className="todo-input"/>
+      <button onClick={submitTodoHandler} className="todo-button" type="submit">
         <i className="fas fa-plus-square"></i>
       </button>
       <div className="select">

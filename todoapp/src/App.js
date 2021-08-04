@@ -10,12 +10,14 @@ import TodoList from './components/TodoList';
 function App() {
   //Input, Funkt., die Input ändert
   const [textInput, setTextInput] = useState("");
+  const [todos, setTodos] = useState([]);
+
   return (
     <div className="App">
       <header>
         <h1>Hudo List</h1>
       </header>
-      <Form/>
+      <Form todos={todos} setTodos={setTodos} setTextInput={setTextInput}/>
       <TodoList/>
     </div>
   );
