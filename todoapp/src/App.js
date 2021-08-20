@@ -30,11 +30,32 @@ function App() {
     }
   };
 
+  //Run once when the app start (useEffect)
+  useEffect(() => {
+    getLocalTodos();
+  }, []);
+
   //UseEffect bei Submit & Completed change
   useEffect(() => {
-    console.log("Hey");
     filterHandler();
+    saveLocalTodos();
   }, [todos, status]);
+
+  //local storage
+  //Ins local storage speichern
+  const saveLocalTodos = () => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  };
+
+  //Vom local storage Daten bekommen
+  const getLocalTodos = () => {
+    if (localStorage.getItem("todos") === null) {
+      localStorage.setItem("todos", JSON.stringify([]));
+    } else {
+      let todoFromLocal = JSON.parse(localStorage.getItem("todos"));
+      setTodos(todoFromLocal);
+    }
+  };
 
   return (
     <div className="App">
@@ -48,7 +69,11 @@ function App() {
         setTextInput={setTextInput}
         setStatus={setStatus}
       />
-      <TodoList todos={todos} setTodos={setTodos} />
+      <TodoList
+        todos={todos}
+        setTodos={setTodos}
+        filteredTodos={filteredTodos}
+      />
     </div>
   );
 }

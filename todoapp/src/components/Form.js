@@ -3,7 +3,6 @@ import React from "react";
 const Form = (props) => {
   //Here i can run JS and Func.
   const inputTextHandler = (event) => {
-    console.log(event.target.value);
     //Input wird hier neu gesetzt
     props.setTextInput(event.target.value);
   };
@@ -14,12 +13,10 @@ const Form = (props) => {
       ...props.todos,
       { text: props.textInput, completed: false, id: Math.random() * 1000 },
     ]);
-    console.log(props.todos);
     props.setTextInput("");
   };
 
   const statusHandler = (event) => {
-    console.log(event.target.value);
     props.setStatus(event.target.value);
   };
 
